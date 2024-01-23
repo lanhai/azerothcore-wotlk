@@ -2168,7 +2168,6 @@ public:
     void _ApplyWeaponDependentAuraCritMod(Item* item, WeaponAttackType attackType, AuraEffect const* aura, bool apply);
     void _ApplyWeaponDependentAuraDamageMod(Item* item, WeaponAttackType attackType, AuraEffect const* aura, bool apply);
 
-    ItemTemplate LoadUpgradeItem(Item* item);
     void _ApplyItemMods(Item* item, uint8 slot, bool apply);
     void _RemoveAllItemMods();
     void _ApplyAllItemMods();

@@ -4413,24 +4413,9 @@ void Player::ApplyEnchantment(Item* item, EnchantmentSlot slot, bool apply, bool
                                 CastCustomSpell(this, enchant_spell_id, &basepoints, &basepoints, &basepoints, true, item);
                             else
                                 CastSpell(this, enchant_spell_id, true, item);
-                            // 学习泰坦之握技能
-                            if ((enchant_spell_id == 97001) and !HasSpell(enchant_spell_id))
-                            {
-                                learnSpell(enchant_spell_id);
-                            }
                         }
                         else
                         { 
-                            // 取消泰坦之握效果
-                            if (enchant_spell_id == 97001)
-                            {
-                                if (HasSpell(enchant_spell_id))
-                                {
-                                    removeSpell(enchant_spell_id, GetActiveSpecMask(), false);
-                                }
-                                SetCanTitanGrip(false);
-                                AutoUnequipOffhandIfNeed();
-                            }
                             RemoveAurasDueToItemSpell(enchant_spell_id, item->GetGUID());
                         }
                     }
