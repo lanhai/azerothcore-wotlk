@@ -164,8 +164,8 @@ bool Acore::Hyperlinks::LinkTags::item::StoreTo(ItemLinkData& val, std::string_v
     }
     else if (randomPropertyId > 0)
     {
-        if (!val.Item->RandomProperty)
-            return false;
+        //if (!val.Item->RandomProperty)
+            //return false;
 
         if (ItemRandomPropertiesEntry const* propEntry = sItemRandomPropertiesStore.LookupEntry(randomPropertyId))
         {
