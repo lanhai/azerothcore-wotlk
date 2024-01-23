@@ -574,6 +574,14 @@ void ScriptMgr::OnEquip(Player* player, Item* it, uint8 bag, uint8 slot, bool up
     });
 }
 
+void ScriptMgr::OnAfterApplyItemMods(Player* player, Item* item, uint8 slot, bool apply)
+{
+    ExecuteScript<PlayerScript>([&](PlayerScript* script)
+    {
+        script->OnAfterApplyItemMods(player,item, slot, apply);
+    });
+}
+
 void ScriptMgr::OnPlayerJoinBG(Player* player)
 {
     ExecuteScript<PlayerScript>([&](PlayerScript* script)

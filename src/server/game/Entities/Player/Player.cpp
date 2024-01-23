@@ -6548,6 +6548,7 @@ void Player::_ApplyItemMods(Item* item, uint8 slot, bool apply)
     ApplyItemEquipSpell(item, apply);
     ApplyEnchantment(item, apply);
 
+    sScriptMgr->OnAfterApplyItemMods(this, item, slot, apply);
     LOG_DEBUG("entities.player.items", "_ApplyItemMods complete.");
 }
 
@@ -7514,6 +7515,7 @@ void Player::_RemoveAllItemMods()
 
             if (i == EQUIPMENT_SLOT_RANGED)
                 _ApplyAmmoBonuses();
+            sScriptMgr->OnAfterApplyItemMods(this, m_items[i], i, false);
         }
     }
 
@@ -7544,6 +7546,7 @@ void Player::_ApplyAllItemMods()
 
             if (i == EQUIPMENT_SLOT_RANGED)
                 _ApplyAmmoBonuses();
+            sScriptMgr->OnAfterApplyItemMods(this, m_items[i], i, true);
         }
     }
 

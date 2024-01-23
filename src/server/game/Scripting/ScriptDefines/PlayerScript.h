@@ -213,6 +213,9 @@ public:
     // After an item has been equipped
     virtual void OnEquip(Player* /*player*/, Item* /*it*/, uint8 /*bag*/, uint8 /*slot*/, bool /*update*/) { }
 
+    // 应用装备属性后
+    virtual void OnAfterApplyItemMods(Player* /*player*/, Item* /*item*/, uint8 /*slot*/, bool /*apply*/) { }
+
     // After player enters queue for BG
     virtual void OnPlayerJoinBG(Player* /*player*/) { }
 
