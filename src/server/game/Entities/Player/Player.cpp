@@ -6470,13 +6470,58 @@ void Player::DuelComplete(DuelCompleteType type)
 }
 
 //---------------------------------------------------------//
-
+ItemTemplate Player::_LoadUpgradeItem(Item* item)
+{
+    ItemTemplate const* proto = item->GetTemplate();
+    ItemTemplate itemTemplate = *proto;
+    //查询装备升级记录
+    QueryResult result = CharacterDatabase.Query("SELECT instance_guid, upgrade_lvl, owner_guid, increase_ratio FROM _item_upgrade WHERE instance_guid = '{}'", item->GetGUID().GetCounter());
+    if (result)
+    {
+        Field* fields = result->Fetch();
+        int32 incRatio = fields[3].Get<uint32>();
+        if (incRatio > 0)
+        {
+            // 伤害提升
+            int32 minDamage = proto->Damage->DamageMin;
+            int32 maxDamage = proto->Damage->DamageMax;
+            if (minDamage > 0 && maxDamage > 0)
+            {
+                itemTemplate.Damage->DamageMin = minDamage + std::ceil((minDamage / static_cast<float>(100)) * incRatio);
+                itemTemplate.Damage->DamageMax = maxDamage + std::ceil((maxDamage / static_cast<float>(100)) * incRatio);
+                LOG_DEBUG("entities.player", ">> 伤害{} => {} - {} => {}", minDamage, itemTemplate.Damage->DamageMin, maxDamage, itemTemplate.Damage->DamageMax);
+            }
+            // 护甲提升
+            int32 armor = proto->Armor;
+            if (armor > 0)
+            {
+                itemTemplate.Armor = armor + std::ceil((armor / static_cast<float>(100)) * incRatio);
+                LOG_DEBUG("entities.player", ">> 护甲{} => {}", proto->Armor, itemTemplate.Armor);
+            }
+            // 属性提升
+            for (uint8 i = 0; i < MAX_ITEM_PROTO_STATS; ++i)
+            {
+                int32  val = 0;
+                if (i >= proto->StatsCount)
+                    continue;
+                val = proto->ItemStat[i].ItemStatValue;
+                if (val == 0)
+                    continue;
+                itemTemplate.ItemStat[i].ItemStatValue = val + std::ceil((val / static_cast<float>(100)) * incRatio);
+                LOG_DEBUG("entities.player", ">> 属性:{} {} => {}", proto->ItemStat[i].ItemStatType, val, itemTemplate.ItemStat[i].ItemStatValue);
+            }
+        }
+    }
+    return itemTemplate;
+}
 void Player::_ApplyItemMods(Item* item, uint8 slot, bool apply)
 {
     if (slot >= INVENTORY_SLOT_BAG_END || !item)
         return;
 
-    ItemTemplate const* proto = item->GetTemplate();
+    //ItemTemplate const* proto = item->GetTemplate();
+    ItemTemplate  temp = _LoadUpgradeItem(item);
+    ItemTemplate const* proto = &temp;
 
     if (!proto)
         return;
@@ -7456,7 +7501,9 @@ void Player::_RemoveAllItemMods()
         {
             if (m_items[i]->IsBroken() || !CanUseAttackType(GetAttackBySlot(i)))
                 continue;
-            ItemTemplate const* proto = m_items[i]->GetTemplate();
+            //ItemTemplate const* proto = m_items[i]->GetTemplate();
+            ItemTemplate  temp = _LoadUpgradeItem(m_items[i]);
+            ItemTemplate const* proto = &temp;
             if (!proto)
                 continue;
 
@@ -7485,7 +7532,9 @@ void Player::_ApplyAllItemMods()
             if (m_items[i]->IsBroken() || !CanUseAttackType(GetAttackBySlot(i)))
                 continue;
 
-            ItemTemplate const* proto = m_items[i]->GetTemplate();
+            //ItemTemplate const* proto = m_items[i]->GetTemplate();
+            ItemTemplate  temp = _LoadUpgradeItem(m_items[i]);
+            ItemTemplate const* proto = &temp;
             if (!proto)
                 continue;
 
