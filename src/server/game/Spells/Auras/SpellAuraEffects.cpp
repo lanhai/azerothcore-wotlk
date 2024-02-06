@@ -377,6 +377,8 @@ pAuraEffectHandler AuraEffectHandler[TOTAL_AURAS] =
     &AuraEffect::HandlePreventResurrection,                       //314 SPELL_AURA_PREVENT_RESURRECTION todo
     &AuraEffect::HandleNoImmediateEffect,                         //315 SPELL_AURA_UNDERWATER_WALKING todo
     &AuraEffect::HandleNoImmediateEffect,                         //316 SPELL_AURA_PERIODIC_HASTE implemented in AuraEffect::CalculatePeriodic
+    &AuraEffect::HandleNoImmediateEffect,                     //317 SPELL_AURA_PERIODIC_HASTE_500
+    &AuraEffect::HandleNoImmediateEffect,                     //318 SPELL_AURA_PERIODIC_HASTE_1000
 };
 
 AuraEffect::AuraEffect(Aura* base, uint8 effIndex, int32* baseAmount, Unit* caster):
@@ -642,6 +644,10 @@ void AuraEffect::CalculatePeriodic(Unit* caster, bool create, bool load)
         {
             if (caster->HasAuraTypeWithAffectMask(SPELL_AURA_PERIODIC_HASTE, m_spellInfo) || m_spellInfo->HasAttribute(SPELL_ATTR5_SPELL_HASTE_AFFECTS_PERIODIC))
                 m_amplitude = int32(m_amplitude * caster->GetFloatValue(UNIT_MOD_CAST_SPEED));
+            if (caster->HasAuraTypeWithAffectMask(SPELL_AURA_PERIODIC_HASTE_500, m_spellInfo))
+                m_amplitude = 500;
+            if (caster->HasAuraTypeWithAffectMask(SPELL_AURA_PERIODIC_HASTE_1000, m_spellInfo))
+                m_amplitude = 1000;
         }
     }
 
