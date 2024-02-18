@@ -582,6 +582,14 @@ void ScriptMgr::OnAfterApplyItemMods(Player* player, Item* item, uint8 slot, boo
     });
 }
 
+void ScriptMgr::OnSetMinion(Player* player, Minion* minion, bool apply)
+{
+    ExecuteScript<PlayerScript>([&](PlayerScript* script)
+    {
+        script->OnSetMinion(player, minion, apply);
+    });
+}
+
 void ScriptMgr::OnPlayerJoinBG(Player* player)
 {
     ExecuteScript<PlayerScript>([&](PlayerScript* script)

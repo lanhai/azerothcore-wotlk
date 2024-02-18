@@ -8989,7 +8989,7 @@ Pet* Player::SummonPet(uint32 entry, float x, float y, float z, float ang, PetTy
 }
 
 void Player::RemovePet(Pet* pet, PetSaveMode mode, bool returnreagent)
-{
+{   
     if (!pet)
         pet = GetPet();
 

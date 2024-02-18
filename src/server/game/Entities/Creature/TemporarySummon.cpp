@@ -368,6 +368,9 @@ void Minion::InitStats(uint32 duration)
         SetCreatorGUID(owner->GetGUID());
         SetFaction(owner->GetFaction());
         owner->SetMinion(this, true);
+
+        if (Player* player = owner->ToPlayer())
+            sScriptMgr->OnSetMinion(player, this, true);
     }
 }
 
@@ -377,7 +380,12 @@ void Minion::RemoveFromWorld()
         return;
 
     if (Unit* owner = GetOwner())
+    {
         owner->SetMinion(this, false);
+        if (Player* player = owner->ToPlayer()) 
+            sScriptMgr->OnSetMinion(player, this, false);
+    }
+        
 
     TempSummon::RemoveFromWorld();
 }

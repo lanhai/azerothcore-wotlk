@@ -217,6 +217,9 @@ public:
     // 应用装备属性后
     virtual void OnAfterApplyItemMods(Player* /*player*/, Item* /*item*/, uint8 /*slot*/, bool /*apply*/) { }
 
+    // 设置小宠物后
+    virtual void OnSetMinion(Player* /*player*/, Minion* /*minion*/, bool /*apply*/) { }
+
     // After player enters queue for BG
     virtual void OnPlayerJoinBG(Player* /*player*/) { }
 
