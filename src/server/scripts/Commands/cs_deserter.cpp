@@ -33,6 +33,7 @@ using namespace Acore::ChatCommands;
 enum Spells
 {
     LFG_SPELL_DUNGEON_DESERTER = 71041,
+    LFG_SPELL_DUNGEON_LEVEL_ALONE = 666662,
     BG_SPELL_DESERTER = 26013
 };
 

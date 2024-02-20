@@ -619,7 +619,7 @@ namespace lfg
             {
                 joinData.result = LFG_JOIN_USING_BG_SYSTEM;
             }
-            else if (player->HasAura(LFG_SPELL_DUNGEON_DESERTER))
+            else if (player->HasAura(LFG_SPELL_DUNGEON_DESERTER) || player->HasAura(LFG_SPELL_DUNGEON_LEVEL_ALONE))
             {
                 joinData.result = LFG_JOIN_DESERTER;
             }
@@ -638,7 +638,7 @@ namespace lfg
                     {
                         if (Player* plrg = itr->GetSource())
                         {
-                            if (plrg->HasAura(LFG_SPELL_DUNGEON_DESERTER))
+                            if (plrg->HasAura(LFG_SPELL_DUNGEON_DESERTER) || plrg->HasAura(LFG_SPELL_DUNGEON_LEVEL_ALONE))
                             {
                                 joinData.result = LFG_JOIN_PARTY_DESERTER;
                             }

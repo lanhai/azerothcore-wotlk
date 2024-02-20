@@ -121,6 +121,7 @@ bool ArenaSpectator::HandleSpectatorSpectateCommand(ChatHandler* handler, std::s
                 switch (aura->GetSpellInfo()->Id)
                 {
                     case lfg::LFG_SPELL_DUNGEON_DESERTER:
+                    case lfg::LFG_SPELL_DUNGEON_LEVEL_ALONE:
                     case lfg::LFG_SPELL_DUNGEON_COOLDOWN:
                     case 26013: // bg deserter
                     case 57724: // sated
