@@ -560,7 +560,7 @@ namespace lfg
         /// Toggle LFG in debug mode
         void ToggleSoloLFG();
         /// Check if debug mode
-        bool IsSoloLFG() const { return m_isSoloLFG; }
+        bool IsSoloLFG();
 
         // LfgQueue
         /// Get last lfg state (NONE, DUNGEON or FINISHED_DUNGEON)

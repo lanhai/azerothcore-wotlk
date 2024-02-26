@@ -2828,4 +2828,13 @@ namespace lfg
         m_isSoloLFG = !m_isSoloLFG;
     }
 
+  
+    bool LFGMgr::IsSoloLFG()
+    {
+        uint32 playerCount = sWorld->GetPlayerCount();
+        if (playerCount < 10) {
+            return true;
+        }
+        return m_isSoloLFG;
+    }
 } // namespace lfg
