@@ -3854,7 +3854,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     });
 
     // Savory Deviate Delight (transformations), allow to mount while transformed
-    ApplySpellFix({ 8219, 8220, 8221, 8222 }, [](SpellInfo* spellInfo)
+    ApplySpellFix({ 8219, 8220, 8221, 8222, 90000,90001,90002,90003,90004,90005,90006,90007,90008,90009,90010,90011,90012,90013,90014,90015,90016,90017,90018,90019,90020,90021,90022,90023,97661 }, [](SpellInfo* spellInfo)
     {
         spellInfo->Attributes &= ~SPELL_ATTR0_NO_IMMUNITIES;
     });
