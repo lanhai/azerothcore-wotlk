@@ -559,6 +559,7 @@ namespace lfg
 
         /// Toggle LFG in debug mode
         void ToggleSoloLFG();
+        void SetSoloLfgOnlinePlayer(uint32 count);
         /// Check if debug mode
         bool IsSoloLFG();
 
@@ -626,7 +627,7 @@ namespace lfg
         uint32 m_raidBrowserLastUpdatedDungeonId[2];       ///< pussywizard: for 2 factions
 
         bool m_isSoloLFG;                                  ///< solo lfg
-
+        uint32 m_soloLfgPlayerOnline;
         LfgQueueContainer QueuesStore;                     ///< Queues
         LfgCachedDungeonContainer CachedDungeonMapStore;   ///< Stores all dungeons by groupType
         // Reward System

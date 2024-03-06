@@ -2827,14 +2827,17 @@ namespace lfg
     {
         m_isSoloLFG = !m_isSoloLFG;
     }
-
+    void LFGMgr::SetSoloLfgOnlinePlayer(uint32 count)
+    {
+        m_soloLfgPlayerOnline = count;
+    }
   
     bool LFGMgr::IsSoloLFG()
     {
         uint32 playerCount = sWorld->GetPlayerCount();
-        if (m_isSoloLFG && playerCount <= 30) {
+        if (m_isSoloLFG && (m_soloLfgPlayerOnline == 0 || playerCount <= m_soloLfgPlayerOnline)) {
             return true;
         }
-        return m_isSoloLFG;
+        return false;
     }
 } // namespace lfg
