@@ -2832,7 +2832,7 @@ namespace lfg
     bool LFGMgr::IsSoloLFG()
     {
         uint32 playerCount = sWorld->GetPlayerCount();
-        if (playerCount < 10) {
+        if (m_isSoloLFG && playerCount <= 30) {
             return true;
         }
         return m_isSoloLFG;
