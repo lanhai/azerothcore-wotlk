@@ -99,6 +99,19 @@ bool ScriptMgr::OnItemRemove(Player* player, Item* item)
     return tempScript ? tempScript->OnRemove(player, item) : false;
 }
 
+bool ScriptMgr::OnBeforCastItemCombatSpell(Player* player, Unit* target, WeaponAttackType attType, uint32 procVictim, uint32 procEx, Item* item)
+{
+    ASSERT(player);
+    ASSERT(target);
+    ASSERT(attType);
+    ASSERT(procVictim);
+    ASSERT(procEx);
+    ASSERT(item);
+
+    auto tempScript = ScriptRegistry<ItemScript>::GetScriptById(item->GetScriptId());
+    return tempScript ? tempScript->OnBeforCastItemCombatSpell(player, target, attType, procVictim, procEx, item) : true;
+}
+
 bool ScriptMgr::OnCastItemCombatSpell(Player* player, Unit* victim, SpellInfo const* spellInfo, Item* item)
 {
     ASSERT(player);
