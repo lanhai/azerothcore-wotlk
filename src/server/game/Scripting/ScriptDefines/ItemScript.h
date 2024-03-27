@@ -40,8 +40,6 @@ public:
     // Called before casting a combat spell from this item (chance on hit spells of item template, can be used to prevent cast if returning false)
     [[nodiscard]] virtual bool OnCastItemCombatSpell(Player* /*player*/, Unit* /*victim*/, SpellInfo const* /*spellInfo*/, Item* /*item*/) { return true; }
 
-    [[nodiscard]] virtual bool OnBeforCastItemCombatSpell(Player* /*player*/, Unit* /*victim*/, WeaponAttackType attType, uint32 procVictim, uint32 procEx, Item* /*item*/) { return true; }
-
     // Called when the item expires (is destroyed).
     [[nodiscard]] virtual bool OnExpire(Player* /*player*/, ItemTemplate const* /*proto*/) { return false; }
 

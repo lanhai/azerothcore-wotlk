@@ -105,12 +105,12 @@ bool ScriptMgr::OnBeforCastItemCombatSpell(Player* player, Unit* target, WeaponA
     ASSERT(target);
     ASSERT(item);
 
-    ExecuteScript<ItemScript>([&](ItemScript* script)
+    ExecuteScript<AllItemScript>([&](AllItemScript* script)
     {
         script->OnBeforCastItemCombatSpell(player, target, attType, procVictim, procEx, item);
     });
 
-    auto tempScript = ScriptRegistry<ItemScript>::GetScriptById(item->GetScriptId());
+    auto tempScript = ScriptRegistry<AllItemScript>::GetScriptById(item->GetScriptId());
     return tempScript ? tempScript->OnBeforCastItemCombatSpell(player, target, attType, procVictim, procEx, item) : true;
 }
 

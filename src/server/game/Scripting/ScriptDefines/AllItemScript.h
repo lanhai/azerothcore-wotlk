@@ -43,6 +43,8 @@ public:
 
     // Called when a player selects an option in an item gossip window
     virtual void OnItemGossipSelectCode(Player* /*player*/, Item* /*item*/, uint32 /*sender*/, uint32 /*action*/, const char* /*code*/) { }
+
+    [[nodiscard]] virtual bool OnBeforCastItemCombatSpell(Player* /*player*/, Unit* /*victim*/, WeaponAttackType attType, uint32 procVictim, uint32 procEx, Item* /*item*/) { return true; }
 };
 
 #endif

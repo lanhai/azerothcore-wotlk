@@ -7177,6 +7177,7 @@ void Player::CastItemCombatSpell(Unit* target, WeaponAttackType attType, uint32 
                             continue;
                     }
 
+                    
                     if (sScriptMgr->OnBeforCastItemCombatSpell(this, target, attType, procVictim, procEx, item)) {
                         CastItemCombatSpell(target, attType, procVictim, procEx, item, proto);
                     }
